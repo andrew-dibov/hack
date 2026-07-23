@@ -1,4 +1,6 @@
-DOCKER : управление контейнером
+DOCKER : контейнер
+
+--- работа с контейнерами
 
 ps : список контейнеров
   docker ps     : контейнеры : запущенные
@@ -40,3 +42,46 @@ run : запуск контейнера
 cp : копирование файлов
   docker cp CTN:PTH HST_PTH : контейнер > хост
   docker cp HST_PTH CTN:PTH : хост > контейнер
+
+stats : анализ контейнеров
+  docker stats    : статистика : запущенные
+  docker stats -a : статистика : запущенные, остановленные и завершившиеся
+
+inspect + top + port : анализ контейнера
+  docker inspect CTN : манифест контейнера
+  docker top CTN     : процессы в контейнере
+  docker port CTN    : проброшенные порты контейнера
+
+--- работа с образами
+
+images : список образов
+  docker images    : образы
+  docker images -a : образы + промежуточные + dangling
+
+build + tag : сборка и тегирование образа
+  docker build -t NAM:TAG PTH : сборка контейнера : dockerfile
+  docker tag IMG NAM:TAG      : создание тега
+
+pull + push : загрузка и отправка образа
+  docker pull IMG:TAG     : загрузка образа
+  docker push USR/IMG:TAG : отправка образа
+
+rmi : удаление образа
+  docker rmi IMG    : удаление : не используемые
+  docker rmi -f IMG : удаление : даже используемые
+
+--- работа с сетями
+
+network ls : список сетей
+  docker network ls    : сети
+  docker network ls -q : идентификаторы сетей
+
+network create + network rm : создание и удаление сети
+  docker network create NET : создание сети
+  docker network rm NET     : удаление сети
+
+  docker network connect NET CTN    : подключение контейнера
+  docker network disconnect NET CTN : отключение контейнера
+
+network inspect NET : анализ сети
+  docker network inspect NET : манифест сети
