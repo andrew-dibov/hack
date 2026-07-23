@@ -1,6 +1,6 @@
-DOCKER : контейнер
+DOCKER
 
---- работа с контейнерами
+--- контейнеры
 
 ps : список контейнеров
   docker ps     : контейнеры : запущенные
@@ -52,7 +52,7 @@ inspect + top + port : анализ контейнера
   docker top CTN     : процессы в контейнере
   docker port CTN    : проброшенные порты контейнера
 
---- работа с образами
+--- образы
 
 images : список образов
   docker images    : образы
@@ -70,7 +70,7 @@ rmi : удаление образа
   docker rmi IMG    : удаление : не используемые
   docker rmi -f IMG : удаление : даже используемые
 
---- работа с сетями
+--- сети
 
 network ls : список сетей
   docker network ls    : сети
@@ -80,8 +80,22 @@ network create + network rm : создание и удаление сети
   docker network create NET : создание сети
   docker network rm NET     : удаление сети
 
+network connect + network disconnect : подключение и отключение сети
   docker network connect NET CTN    : подключение контейнера
   docker network disconnect NET CTN : отключение контейнера
 
 network inspect NET : анализ сети
   docker network inspect NET : манифест сети
+
+--- администрирование
+
+system df : просмотр места
+  docker system df    : свободное место
+  docker system df -v : свободное место : подробно
+
+system prune : системная очистка
+  docker image prune     : образы без тега
+  docker volume prune    : не используемые тома
+  docker container prune : остановленные контейнеры
+  docker system prune    : остановленные контейнеры, пустые сети, образы без тега, кеш
+  docker system prune -a : остановленные контейнеры, пустые сети, образы, кеш
