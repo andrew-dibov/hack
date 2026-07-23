@@ -1,0 +1,87 @@
+DOCKER COMPOSE
+
+--- контейнеры
+  
+compose ps : список контейнеров проекта
+  docker compose ps    : контейнеры проекта : запущенные
+  docker compose ps -a : контейнеры проекта : запущенные, остановленные и завершившиеся
+
+--- проекты
+  
+compose ls : список проектов
+  docker compose ls    : проекты : запущенные
+  docker compose ls -a : проекты : запущенные и остановленные
+
+
+```bash
+docker compose images    # образы проекта
+docker compose top       # процессы проекта
+docker compose stats     # потребление ресурсов
+```
+
+#### Лог
+
+```bash
+docker compose logs        # лог
+docker compose logs -f     # лог : live-режим
+docker compose logs SVC    # лог : определенный сервис
+```
+
+#### Команда
+
+```bash
+docker compose exec SVC CMD       # команда
+docker compose exec -d SVC CMD    # команда : фоновый режим
+```
+
+```bash
+docker compose exec -i SVC CMD     # интерактивная команда
+docker compose exec -it SVC CMD    # интерактивная команда : TTY
+```
+
+#### Завершение
+
+```bash
+docker compose down       # завершение
+docker compose down -v    # завершение + удаление связанных анонимных томов
+```
+
+#### Управление
+
+```bash
+docker compose start      # запуск
+docker compose restart    # перезапуск
+docker compose pause      # приостановка
+docker compose unpause    # возобновление
+docker compose stop       # остановка
+```
+
+#### Запуск
+
+```bash
+docker compose up                     # создание
+docker compose up -d                  # создание : фоновый режим
+docker compose up --build             # создание + пересборка контейнеров
+docker compose up --force-recreate    # создание + пересоздание контейнеров
+```
+
+
+#### Конфигурация
+
+```bash
+docker compose config               # валидация
+docker compose config --services    # сервисы проекта
+```
+
+#### Сборка
+
+```bash
+docker compose build               # сборка проекта
+docker compose build --no-cache    # сборка проекта : без кеша
+```
+
+#### Образ
+
+```bash
+docker compose pull    # обновление образов
+```
