@@ -1,23 +1,24 @@
 DOCKER COMPOSE
 
---- контейнеры
-  
-compose ps : список контейнеров проекта
-  docker compose ps    : контейнеры проекта : запущенные
-  docker compose ps -a : контейнеры проекта : запущенные, остановленные и завершившиеся
-
 --- проекты
   
 compose ls : список проектов
   docker compose ls    : проекты : запущенные
   docker compose ls -a : проекты : запущенные и остановленные
 
+--- контейнеры
+  
+compose ps : список контейнеров проекта
+  docker compose ps    : контейнеры проекта : запущенные
+  docker compose ps -a : контейнеры проекта : запущенные, остановленные и завершившиеся
 
-```bash
-docker compose images    # образы проекта
-docker compose top       # процессы проекта
-docker compose stats     # потребление ресурсов
-```
+images + top + stats : 
+  docker compose images    # образы проекта
+  docker compose top       # процессы проекта
+  docker compose stats     # потребление ресурсов
+
+
+
 
 #### Лог
 
