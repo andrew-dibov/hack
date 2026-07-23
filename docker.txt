@@ -1,7 +1,42 @@
 DOCKER : управление контейнером
 
-ps : просмотр
-  docker ps      : контейнеры : запущенные
-  docker ps -a   : контейнеры : запущенные, остановленные и завершившиеся
-  docker ps -q   : идентификаторы контейнеров : запущенные
-  docker ps -qa  : идентификаторы контейнеров : запущенные, остановленные и завершившиеся
+ps : список контейнеров
+  docker ps     : контейнеры : запущенные
+  docker ps -a  : контейнеры : запущенные, остановленные и завершившиеся
+  docker ps -q  : идентификаторы контейнеров : запущенные
+  docker ps -qa : идентификаторы контейнеров : запущенные, остановленные и завершившиеся
+
+logs : логи контейнера
+  docker logs CTN        : логи
+  docker logs -t CTN     : логи + временные метки
+  docker logs -f CTN     : логи : live
+  docker logs -n NUM CTN : логи : tail
+
+exec : выполнение команды в контейнере
+  docker exec CTN CMD     : команда
+  docker exec -d CTN CMD  : команда : фоновый режим
+  docker exec -i CTN CMD  : интерактивная команда
+  docker exec -it CTN CMD : интерактивная команда : TTY
+
+stop + kill : завершение контейнера
+  docker stop CTN : SIGTERM > timeout > SIGKILL
+  docker kill CTN : SIGKILL
+
+rm : удаление контейнера
+  docker rm CTN    : удаление
+  docker rm -f CTN : удаление + остановка
+  docker rm -v CTN : удаление + удаление связанных анонимных томов
+
+run : запуск контейнера
+  docker run IMG                    : запуск
+  docker run -d IMG                 : запуск : фоновый режим
+  docker run -i IMG CMD             : запуск + интерактивная команда
+  docker run -it IMG CMD            : запуск + интерактивная команда : TTY
+  docker run --name NAM IMG         : запуск + именование
+  docker run -p HST_PRT:CTN_PRT IMG : запуск + проброс порта
+  docker run -e KEY=VAL IMG         : запуск + экспорт переменной окружения
+  docker run -v HST_PTH:CTN_PTH IMG : запуск + монтирование тома/директории
+
+cp : копирование файлов
+  docker cp CTN:PTH HST_PTH : контейнер > хост
+  docker cp HST_PTH CTN:PTH : хост > контейнер
