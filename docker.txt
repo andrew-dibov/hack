@@ -1,147 +1,152 @@
 DOCKER
 
+ls  : list
+df  : disk free
+ps  : process status
+top : table of processes
+
 docker container :
 
   ls :
-    docker container ls     : запущенные
-    docker container ls -q  : ID : запущенные
-    docker container ls -a  : все (запущенные, остановленные, завершившиеся)
-    docker container ls -qa : ID : все
+    docker container ls     :
+    docker container ls -q  : ID
+    docker container ls -a  : запущенные, остановленные, завершившиеся
+    docker container ls -qa : ID : запущенные, остановленные, завершившиеся
 
   stats :
-    docker container stats    : запущенные
-    docker container stats -a : все (данные только у работающих)
+    docker container stats    :
+    docker container stats -a : запущенные, остановленные, завершившиеся
 
   inspect :
-    docker container inspect CTN : подробная информация
+    docker container inspect CTN : подробности
 
   top :
-    docker container top CTN : процессы
+    docker container top CTN :
 
   port :
-    docker container port CTN : проброшенные порты
+    docker container port CTN : проброшенные
 
   logs :
-    docker container logs CTN        : логи
-    docker container logs -n NUM CTN : последние N строк
-    docker container logs -f CTN     : следить в реальном времени
-    docker container logs -t CTN     : с метками времени
+    docker container logs CTN        :
+    docker container logs -n NUM CTN : tail
+    docker container logs -f CTN     : live
+    docker container logs -t CTN     : timestamp
 
   run :
-    docker container run IMG                    : запуск
-    docker container run -d IMG                 : запуск в фоне
-    docker container run -i IMG CMD             : интерактивный запуск
-    docker container run -it IMG CMD            : интерактивный запуск с TTY
-    docker container run --name NAM IMG         : задать имя
+    docker container run IMG                    :
+    docker container run -d IMG                 : фоном
+    docker container run -i IMG CMD             : интерактивно
+    docker container run -it IMG CMD            : интерактивно : TTY
+    docker container run --name NAM IMG         : имя
+    docker container run -e KEY=VAL IMG         : переменная
+    docker container run -v HST_PTH:CTN_PTH IMG : монтирование
     docker container run -p HST_PRT:CTN_PRT IMG : проброс порта
-    docker container run -e KEY=VAL IMG         : переменная окружения
-    docker container run -v HST_PTH:CTN_PTH IMG : монтирование тома/директории
 
   pause :
-    docker container pause CTN : приостановить
+    docker container pause CTN :
 
   unpause :
-    docker container unpause CTN : возобновить
+    docker container unpause CTN :
 
   stop :
-    docker container stop CTN : SIGTERM → таймаут → SIGKILL
+    docker container stop CTN : SIGTERM > timeout > SIGKILL
 
   kill :
     docker container kill CTN : SIGKILL
 
   rm :
-    docker container rm CTN    : удалить
-    docker container rm -f CTN : принудительно удалить (остановить)
-    docker container rm -v CTN : удалить и удалить анонимные тома
+    docker container rm CTN    :
+    docker container rm -f CTN : принудительно
+    docker container rm -v CTN : анонимные тома
 
   exec :
-    docker container exec CTN CMD     : выполнить команду
-    docker container exec -d CTN CMD  : выполнить в фоне
-    docker container exec -i CTN CMD  : интерактивное выполнение
-    docker container exec -it CTN CMD : интерактивное выполнение с TTY
+    docker container exec CTN CMD     :
+    docker container exec -d CTN CMD  : фоном
+    docker container exec -i CTN CMD  : интерактивно
+    docker container exec -it CTN CMD : интерактивно : TTY
 
   cp :
-    docker container cp CTN:PTH HST_PTH : скопировать из контейнера
-    docker container cp HST_PTH CTN:PTH : скопировать в контейнер
+    docker container cp CTN:PTH HST_PTH : контейнер > хост
+    docker container cp HST_PTH CTN:PTH : хост > контейнер
 
   rename :
-    docker container rename OLD NAM : переименовать
+    docker container rename OLD NAM :
 
   commit :
-    docker container commit CTN NEW_IMG:TAG : создать образ из контейнера
+    docker container commit CTN NEW_IMG:TAG : образ из контейнера
 
 
 docker image :
 
   ls :
-    docker image ls    : образы
-    docker image ls -a : все образы (включая промежуточные и dangling)
+    docker image ls    :
+    docker image ls -a : промежуточные, dangling
 
   history :
-    docker image history IMG : слои образа
+    docker image history IMG : слои
 
   build :
-    docker image build -t NAM:TAG PTH : собрать из Dockerfile
+    docker image build -t NAM:TAG PTH : сборка : Dockerfile
 
   tag :
-    docker image tag IMG NAM:TAG : присвоить тег
+    docker image tag IMG NAM:TAG : тегирование
 
   rm :
-    docker image rm IMG    : удалить
-    docker image rm -f IMG : принудительно удалить (даже если используется)
+    docker image rm IMG    :
+    docker image rm -f IMG : принудительно
 
   pull :
-    docker image pull IMG:TAG : загрузить из реестра
+    docker image pull IMG:TAG : хост < реестр
 
   push :
-    docker image push USR/IMG:TAG : отправить в реестр
+    docker image push USR/IMG:TAG : хост > реестр
 
 
 docker network :
 
   ls :
-    docker network ls    : сети
-    docker network ls -q : ID сетей
+    docker network ls    :
+    docker network ls -q : ID
 
   inspect :
-    docker network inspect NET : подробная информация
+    docker network inspect NET : подробности
 
   create :
-    docker network create NET : создать
+    docker network create NET :
 
   rm :
-    docker network rm NET : удалить
+    docker network rm NET :
 
   connect :
-    docker network connect NET CTN : подключить контейнер
+    docker network connect NET CTN : подключить
 
   disconnect :
-    docker network disconnect NET CTN : отключить контейнер
+    docker network disconnect NET CTN : отключить
 
 
 docker volume :
 
   ls :
-    docker volume ls    : тома
-    docker volume ls -q : ID томов
+    docker volume ls    :
+    docker volume ls -q : ID
 
   inspect :
-    docker volume inspect VOL : подробная информация
+    docker volume inspect VOL : подробности
 
   create :
-    docker volume create VOL : создать
+    docker volume create VOL :
 
   rm :
-    docker volume rm VOL    : удалить
-    docker volume rm -f VOL : принудительно удалить (даже если используется)
+    docker volume rm VOL    :
+    docker volume rm -f VOL : принудительно
 
 
 docker system :
 
   df :
-    docker system df    : использование дискового пространства
-    docker system df -v : подробно (по слоям и томам)
+    docker system df    :
+    docker system df -v : подробно
 
   prune :
-    docker system prune    : очистить (остановленные контейнеры, пустые сети, образы без тега, кеш сборки)
-    docker system prune -a : очистить всё (включая все неиспользуемые образы)
+    docker system prune    : очистка : остановленные контейнеры, пустые сети, образы без тега, кеш сборки
+    docker system prune -a : очистка : включая все неиспользуемые образы
