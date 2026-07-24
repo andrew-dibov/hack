@@ -4,64 +4,63 @@ docker container : изолированная среда < файловое пр
 
   ls :
     docker container ls : контейнеры
-    docker container ls -q : ID
-    docker container ls -a : запущенные, остановленные, завершившиеся
+    docker container ls -a : все
 
   stats :
-    docker container stats :
-    docker container stats -a : запущенные, остановленные, завершившиеся
+    docker container stats : ресурсы
+    docker container stats -a : все
 
   inspect :
-    docker container inspect CTN                 :
+    docker container inspect CTN
 
   top + port :
-    docker container top CTN                     :
-    docker container port CTN                    : пробросы портов
+    docker container top CTN : процессы
+    docker container port CTN : порты
 
   logs :
-    docker container logs CTN                    :
-    docker container logs -n NUM CTN             : tail
-    docker container logs -f CTN                 : live
-    docker container logs -t CTN                 : timestamp
+    docker container logs CTN : логи
+    docker container logs -n NUM CTN : tail
+    docker container logs -f CTN : live
+    docker container logs -t CTN : timestamp
 
   run :
-    docker container run IMG                     :
-    docker container run -d IMG                  : фон
-    docker container run -i IMG CMD              : интерактив
-    docker container run -it IMG CMD             : интерактив + TTY
-    docker container run --name NAM IMG          : именование контейнера
-    docker container run -e KEY=VAL IMG          : экспорт переменной окружения
-    docker container run -p HST_PRT:CTN_PRT IMG  : проброс порта
-    docker container run -v HST_PTH:CTN_PTH IMG  : монтирование тома/директории
+    docker container run IMG
+    docker container run -d IMG : фон
+    docker container run -i IMG CMD : интерактив
+    docker container run -it IMG CMD : интерактив + TTY
+    docker container run --name NAM IMG : именование контейнера
+    docker container run -e KEY=VAL IMG : экспорт переменной окружения
+    docker container run -p HST_PRT:CTN_PRT IMG : проброс порта
+    docker container run -v HST_PTH:CTN_PTH IMG : монтирование тома/директории
 
   pause + unpause :
-    docker container pause CTN                   :
-    docker container unpause CTN                 :
+    docker container pause CTN
+    docker container unpause CTN
 
   stop + kill :
-    docker container stop CTN                    : SIGTERM > timeout > SIGKILL
-    docker container kill CTN                    : SIGKILL
+    docker container stop CTN : SIGTERM > timeout > SIGKILL
+    docker container kill CTN : SIGKILL
 
   rm :
-    docker container rm CTN                      :
-    docker container rm -f CTN                   : принудительно
-    docker container rm -v CTN                   : с анонимными томами
+    docker container rm CTN
+    docker container rm -f CTN : принудительно
+    docker container rm -v CTN : с анонимными томами
 
   exec :
-    docker container exec CTN CMD                :
-    docker container exec -d CTN CMD             : фон
-    docker container exec -i CTN CMD             : интерактив
-    docker container exec -it CTN CMD            : интерактив + TTY
+    docker container exec CTN CMD
+    docker container exec -d CTN CMD : фон
+    docker container exec -i CTN CMD : интерактив
+    docker container exec -it CTN CMD : интерактив + TTY
 
   cp :
-    docker container cp CTN:PTH HST_PTH          : контейнер > хост
-    docker container cp HST_PTH CTN:PTH          : хост > контейнер
+    docker container cp CTN:PTH HST_PTH : контейнер > хост
+    docker container cp HST_PTH CTN:PTH : хост > контейнер
 
   rename :
-    docker container rename OLD NAM              :
+    docker container rename OLD NAM
 
   commit :
-    docker container commit CTN NEW_IMG:TAG      : создание образа из контейнера
+    docker container commit CTN NEW_IMG:TAG : образ из контейнера
 
 
 docker image : шаблон контейнера из слоев < приложение + зависимости + настройки
