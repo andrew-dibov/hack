@@ -44,7 +44,7 @@ docker container :
     docker container unpause CTN : возобновить
 
   stop :
-    docker container stop CTN : SIGTERM > таймаут > SIGKILL
+    docker container stop CTN : SIGTERM → таймаут → SIGKILL
 
   kill :
     docker container kill CTN : SIGKILL
