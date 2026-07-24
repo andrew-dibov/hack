@@ -20,11 +20,9 @@ docker container :
   inspect :
     docker container inspect CTN : подробности
 
-  top :
-    docker container top CTN :
-
-  port :
-    docker container port CTN : проброшенные
+  top + port :
+    docker container top CTN  :
+    docker container port CTN : пробросы
 
   logs :
     docker container logs CTN        :
@@ -37,21 +35,17 @@ docker container :
     docker container run -d IMG                 : фоном
     docker container run -i IMG CMD             : интерактивно
     docker container run -it IMG CMD            : интерактивно : TTY
-    docker container run --name NAM IMG         : имя
-    docker container run -e KEY=VAL IMG         : переменная
-    docker container run -v HST_PTH:CTN_PTH IMG : монтирование
+    docker container run --name NAM IMG         : именование
+    docker container run -e KEY=VAL IMG         : экспорт переменной
     docker container run -p HST_PRT:CTN_PRT IMG : проброс порта
+    docker container run -v HST_PTH:CTN_PTH IMG : монтирование тома/директории
 
-  pause :
-    docker container pause CTN :
-
-  unpause :
+  pause + unpause :
+    docker container pause CTN   :
     docker container unpause CTN :
 
-  stop :
+  stop + kill:
     docker container stop CTN : SIGTERM > timeout > SIGKILL
-
-  kill :
     docker container kill CTN : SIGKILL
 
   rm :
@@ -73,7 +67,7 @@ docker container :
     docker container rename OLD NAM :
 
   commit :
-    docker container commit CTN NEW_IMG:TAG : образ из контейнера
+    docker container commit CTN NEW_IMG:TAG : создать образ из контейнера
 
 
 docker image :
@@ -83,23 +77,19 @@ docker image :
     docker image ls -a : промежуточные, dangling
 
   history :
-    docker image history IMG : слои
+    docker image history IMG : слои образа
 
-  build :
+  build + tag:
     docker image build -t NAM:TAG PTH : сборка : Dockerfile
+    docker image tag IMG NAM:TAG      : тегирование
 
-  tag :
-    docker image tag IMG NAM:TAG : тегирование
+  pull + push :
+    docker image pull IMG:TAG     : хост < реестр
+    docker image push USR/IMG:TAG : хост > реестр
 
   rm :
     docker image rm IMG    :
     docker image rm -f IMG : принудительно
-
-  pull :
-    docker image pull IMG:TAG : хост < реестр
-
-  push :
-    docker image push USR/IMG:TAG : хост > реестр
 
 
 docker network :
@@ -111,17 +101,13 @@ docker network :
   inspect :
     docker network inspect NET : подробности
 
-  create :
+  create + rm :
     docker network create NET :
-
-  rm :
     docker network rm NET :
 
-  connect :
-    docker network connect NET CTN : подключить
-
-  disconnect :
-    docker network disconnect NET CTN : отключить
+  connect + disconnect:
+    docker network connect NET CTN : подключение
+    docker network disconnect NET CTN : отключение
 
 
 docker volume :
@@ -133,12 +119,10 @@ docker volume :
   inspect :
     docker volume inspect VOL : подробности
 
-  create :
+  create + rm:
     docker volume create VOL :
-
-  rm :
-    docker volume rm VOL    :
-    docker volume rm -f VOL : принудительно
+    docker volume rm VOL     :
+    docker volume rm -f VOL  : принудительно
 
 
 docker system :
@@ -149,4 +133,4 @@ docker system :
 
   prune :
     docker system prune    : очистка : остановленные контейнеры, пустые сети, образы без тега, кеш сборки
-    docker system prune -a : очистка : включая все неиспользуемые образы
+    docker system prune -a : очистка : неиспользуемые образы
