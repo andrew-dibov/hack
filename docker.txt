@@ -1,16 +1,30 @@
 DOCKER
 
-docker : общие команды
-  ps : процессы
+ls : list
+ps : process status
+df : disk free
+rm : remove
+
+docker :
+  ps : список
     docker ps     : контейнеры : запущенные
     docker ps -a  : контейнеры : запущенные, остановленные и завершившиеся
     docker ps -q  : ID контейнеров : запущенных
-    docker ps -qa : ID контейнеров : запущенных, остановленных и завершившихся
   logs : логи
     docker logs CTN        : логи
     docker logs -t CTN     : логи + временные метки
     docker logs -n NUM CTN : логи : tail
     docker logs -f CTN     : логи : live
+  stats : ресурсы
+    docker stats    : статистика : запущенные
+    docker stats -a : статистика : запущенные, остановленные и завершившиеся
+    docker ps -qa : ID контейнеров : запущенных, остановленных и завершившихся
+  top : процессы
+    docker top CTN : процессы
+  port : порты
+    docker port CTN : проброшенные порты
+  inspect : анализ
+    docker inspect ANY : подробная информация
   exec : команды
     docker exec CTN CMD     : команда
     docker exec -d CTN CMD  : команда : фоновый режим
@@ -35,8 +49,22 @@ docker : общие команды
   cp : копирование
     docker cp CTN:PTH HST_PTH : контейнер > хост
     docker cp HST_PTH CTN:PTH : хост > контейнер
+  images : список
+    docker images    : образы
+    docker images -a : образы + промежуточные + dangling
+  build : сборка
+    docker build -t NAM:TAG PTH : сборка образа : dockerfile
+  tag : тегирование
+    docker tag IMG NAM:TAG : тегирование
+  pull : загрузка из реестра
+    docker pull IMG:TAG : загрузка образа
+  push : загрузка в реестр
+    docker push USR/IMG:TAG : отправка образа
+  rmi : удаление
+    docker rmi IMG    : удаление : не используемые
+    docker rmi -f IMG : удаление : используемые тоже
 
-docker container : управление контейнерами
+docker container :
   ls : список
     docker container ls     : контейнеры : запущенные
     docker container ls -a  : контейнеры : запущенные, остановленные и завершившиеся
@@ -47,6 +75,13 @@ docker container : управление контейнерами
     docker container logs -t CTN     : логи + временные метки
     docker container logs -f CTN     : логи : live
     docker container logs -n NUM CTN : логи : tail
+  stats : ресурсы
+    docker container stats    : статистика : запущенные
+    docker container stats -a : статистика : запущенные, остановленные и завершившиеся
+  top : процессы
+    docker container top CTN : процессы
+  port : порты
+    docker container port CTN : проброшенные порты
   exec : команды
     docker container exec CTN CMD     : команда
     docker container exec -d CTN CMD  : команда : фоновый режим
@@ -72,63 +107,39 @@ docker container : управление контейнерами
     docker container cp CTN:PTH HST_PTH : контейнер > хост
     docker container cp HST_PTH CTN:PTH : хост > контейнер
 
+docker image : образы
+  ls : список
+    docker image ls    : образы
+    docker image ls -a : образы + промежуточные + dangling
+  build : сборка
+    docker image build -t NAM:TAG PTH : сборка образа : dockerfile
+  tag : тегирование
+    docker image tag IMG NAM:TAG : тегирование
+  pull : загрузка из реестра
+    docker image pull IMG:TAG : загрузка образа
+  push : загрузка в реестр
+    docker image push USR/IMG:TAG : отправка образа
+  rm : удаление
+    docker image rm IMG    : удаление : не используемые
+    docker image rm -f IMG : удаление : используемые тоже
 
+docker network : сети
+  ls : список
+    docker network ls    : сети
+    docker network ls -q : ID сетей
+  create : создание
+    docker network create NET : создание
+  rm : удаление
+    docker network rm NET : удаление
+  connect : подключение
+    docker network connect NET CTN : подключение
+  disconnect : отключение
+    docker network disconnect NET CTN : отключение
 
-
----
-stats : анализ контейнеров
-  docker stats    : статистика : запущенные
-  docker stats -a : статистика : запущенные, остановленные и завершившиеся
-
-inspect + top + port : анализ контейнера
-  docker inspect CTN : манифест контейнера
-  docker top CTN     : процессы в контейнере
-  docker port CTN    : проброшенные порты контейнера
-
---- образы
-
-images : список образов
-  docker images    : образы
-  docker images -a : образы + промежуточные + dangling
-
-build + tag : сборка и тегирование образа
-  docker build -t NAM:TAG PTH : сборка контейнера : dockerfile
-  docker tag IMG NAM:TAG      : создание тега
-
-pull + push : загрузка и отправка образа
-  docker pull IMG:TAG     : загрузка образа
-  docker push USR/IMG:TAG : отправка образа
-
-rmi : удаление образа
-  docker rmi IMG    : удаление : не используемые
-  docker rmi -f IMG : удаление : даже используемые
-
---- сети
-
-network ls : список сетей
-  docker network ls    : сети
-  docker network ls -q : идентификаторы сетей
-
-network create + network rm : создание и удаление сети
-  docker network create NET : создание сети
-  docker network rm NET     : удаление сети
-
-network connect + network disconnect : подключение и отключение сети
-  docker network connect NET CTN    : подключение контейнера
-  docker network disconnect NET CTN : отключение контейнера
-
-network inspect NET : анализ сети
-  docker network inspect NET : манифест сети
-
---- администрирование
-
-system df : просмотр места
-  docker system df    : свободное место
-  docker system df -v : свободное место : подробно
-
-system prune : системная очистка
-  docker image prune     : образы без тега
-  docker volume prune    : не используемые тома
-  docker container prune : остановленные контейнеры
-  docker system prune    : остановленные контейнеры, пустые сети, образы без тега, кеш
-  docker system prune -a : остановленные контейнеры, пустые сети, образы, кеш
+docker system : администрирование
+  df : свободное место
+    docker system df    : место
+    docker system df -v : место : подробно
+  prune : очистка
+    docker system prune    : остановленные контейнеры, пустые сети, образы без тега, кеш
+    docker system prune -a : остановленные контейнеры, пустые сети, образы, кеш
