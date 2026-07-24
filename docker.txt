@@ -1,136 +1,289 @@
-DOCKER
-
 ls  : list
 df  : disk free
 ps  : process status
 top : table of processes
 
+
+DOCKER
+
 docker container :
 
   ls :
-    docker container ls     :
-    docker container ls -q  : ID
-    docker container ls -a  : запущенные, остановленные, завершившиеся
-    docker container ls -qa : ID : запущенные, остановленные, завершившиеся
+    docker container ls                         :
+    docker container ls -q                      : ID
+    docker container ls -a                      : запущенные, остановленные, завершившиеся
 
   stats :
-    docker container stats    :
-    docker container stats -a : запущенные, остановленные, завершившиеся
+    docker container stats                      :
+    docker container stats -a                   : запущенные, остановленные, завершившиеся
 
   inspect :
-    docker container inspect CTN : подробности
+    docker container inspect CTN                :
 
   top + port :
-    docker container top CTN  :
-    docker container port CTN : пробросы
+    docker container top CTN                    :
+    docker container port CTN                   : пробросы портов
 
   logs :
-    docker container logs CTN        :
-    docker container logs -n NUM CTN : tail
-    docker container logs -f CTN     : live
-    docker container logs -t CTN     : timestamp
+    docker container logs CTN                   :
+    docker container logs -n NUM CTN            : tail
+    docker container logs -f CTN                : live
+    docker container logs -t CTN                : timestamp
 
   run :
     docker container run IMG                    :
-    docker container run -d IMG                 : фоном
-    docker container run -i IMG CMD             : интерактивно
-    docker container run -it IMG CMD            : интерактивно : TTY
-    docker container run --name NAM IMG         : именование
-    docker container run -e KEY=VAL IMG         : экспорт переменной
+    docker container run -d IMG                 : фон
+    docker container run -i IMG CMD             : интерактив
+    docker container run -it IMG CMD            : интерактив + TTY
+    docker container run --name NAM IMG         : именование контейнера
+    docker container run -e KEY=VAL IMG         : экспорт переменной окружения
     docker container run -p HST_PRT:CTN_PRT IMG : проброс порта
     docker container run -v HST_PTH:CTN_PTH IMG : монтирование тома/директории
 
   pause + unpause :
-    docker container pause CTN   :
-    docker container unpause CTN :
+    docker container pause CTN                  :
+    docker container unpause CTN                :
 
-  stop + kill:
-    docker container stop CTN : SIGTERM > timeout > SIGKILL
-    docker container kill CTN : SIGKILL
+  stop + kill :
+    docker container stop CTN                   : SIGTERM > timeout > SIGKILL
+    docker container kill CTN                   : SIGKILL
 
   rm :
-    docker container rm CTN    :
-    docker container rm -f CTN : принудительно
-    docker container rm -v CTN : анонимные тома
+    docker container rm CTN                     :
+    docker container rm -f CTN                  : принудительно
+    docker container rm -v CTN                  : с анонимными томами
 
   exec :
-    docker container exec CTN CMD     :
-    docker container exec -d CTN CMD  : фоном
-    docker container exec -i CTN CMD  : интерактивно
-    docker container exec -it CTN CMD : интерактивно : TTY
+    docker container exec CTN CMD               :
+    docker container exec -d CTN CMD            : фон
+    docker container exec -i CTN CMD            : интерактив
+    docker container exec -it CTN CMD           : интерактив + TTY
 
   cp :
-    docker container cp CTN:PTH HST_PTH : контейнер > хост
-    docker container cp HST_PTH CTN:PTH : хост > контейнер
+    docker container cp CTN:PTH HST_PTH         : контейнер > хост
+    docker container cp HST_PTH CTN:PTH         : хост > контейнер
 
   rename :
-    docker container rename OLD NAM :
+    docker container rename OLD NAM             :
 
   commit :
-    docker container commit CTN NEW_IMG:TAG : создать образ из контейнера
+    docker container commit CTN NEW_IMG:TAG     : создание образа из контейнера
 
 
 docker image :
 
   ls :
-    docker image ls    :
-    docker image ls -a : промежуточные, dangling
+    docker image ls                             :
+    docker image ls -a                          : промежуточные + dangling
 
   history :
-    docker image history IMG : слои образа
+    docker image history IMG                    : слои
 
-  build + tag:
-    docker image build -t NAM:TAG PTH : сборка : Dockerfile
-    docker image tag IMG NAM:TAG      : тегирование
+  build + tag :
+    docker image build -t NAM:TAG PTH           : сборка
+    docker image tag IMG NAM:TAG                : тегирование
 
   pull + push :
-    docker image pull IMG:TAG     : хост < реестр
-    docker image push USR/IMG:TAG : хост > реестр
+    docker image pull IMG:TAG                   : хост < реестр
+    docker image push USR/IMG:TAG               : хост > реестр
 
   rm :
-    docker image rm IMG    :
-    docker image rm -f IMG : принудительно
+    docker image rm IMG                         :
+    docker image rm -f IMG                      : принудительно
 
 
 docker network :
 
   ls :
-    docker network ls    :
-    docker network ls -q : ID
+    docker network ls                           :
+    docker network ls -q                        : ID
 
   inspect :
-    docker network inspect NET : подробности
+    docker network inspect NET                  :
 
   create + rm :
-    docker network create NET :
-    docker network rm NET :
+    docker network create NET                   :
+    docker network rm NET                       :
 
-  connect + disconnect:
-    docker network connect NET CTN : подключение
-    docker network disconnect NET CTN : отключение
+  connect + disconnect :
+    docker network connect NET CTN              : подключение контейнера
+    docker network disconnect NET CTN           : отключение контейнера
 
 
 docker volume :
 
   ls :
-    docker volume ls    :
-    docker volume ls -q : ID
+    docker volume ls                            :
+    docker volume ls -q                         : ID
 
   inspect :
-    docker volume inspect VOL : подробности
+    docker volume inspect VOL                   :
 
-  create + rm:
-    docker volume create VOL :
-    docker volume rm VOL     :
-    docker volume rm -f VOL  : принудительно
+  create + rm :
+    docker volume create VOL                    :
+    docker volume rm VOL                        :
+    docker volume rm -f VOL                     : принудительно
 
 
 docker system :
 
   df :
-    docker system df    :
-    docker system df -v : подробно
+    docker system df                            :
+    docker system df -v                         : подробно
 
   prune :
-    docker system prune    : очистка : остановленные контейнеры, пустые сети, образы без тега, кеш сборки
-    docker system prune -a : очистка : неиспользуемые образы
+    docker system prune                         : неиспользуемые контейнеры + сети + образы без тега + кеш сборки
+    docker system prune -a                      : неиспользуемые образы
+    docker system prune --volumes               : анонимные тома
+
+
+DOCKER COMPOSE
+
+docker compose :
+
+  ls :
+    docker compose ls                           : проекты
+    docker compose ls -a                        : запущенные, остановленные, завершившиеся
+
+  ps :
+    docker compose ps                           : контейнеры
+    docker compose ps -a                        : запущенные, остановленные, завершившиеся
+
+  images :
+    docker compose images                       :
+
+  top :
+    docker compose top                          :
+
+  stats :
+    docker compose stats                        :
+
+  logs :
+    docker compose logs                         :
+    docker compose logs -f                      : live
+    docker compose logs SVC                     : сервис
+
+  exec :
+    docker compose exec SVC CMD                 :
+    docker compose exec -d SVC CMD              : фон
+    docker compose exec -i SVC CMD              : интерактив
+    docker compose exec -it SVC CMD             : интерактив + TTY
+
+  down :
+    docker compose down                         :
+    docker compose down -v                      : с анонимными томами
+
+  start + restart + pause + unpause + stop :
+    docker compose start                        :
+    docker compose restart                      :
+    docker compose pause                        :
+    docker compose unpause                      :
+    docker compose stop                         :
+
+  up :
+    docker compose up                           :
+    docker compose up -d                        : фон
+    docker compose up --build                   : с пересборкой
+    docker compose up --force-recreate          : с пересозданием
+
+  config :
+    docker compose config                       : проверка
+    docker compose config --quiet               : проверка без вывода
+
+  build :
+    docker compose build                        : сборка
+    docker compose build --no-cache             : сборка без кеша
+
+  pull :
+    docker compose pull                         : обновление образов
+
+  rm :
+    docker compose rm                           :
+    docker compose rm -f                        : принудительно
+
+
+DOCKER SWARM
+
+docker context :
+
+  ls :
+    docker context ls :
+
+  inspect :
+    docker context inspect :
+
+  use :
+    docker context use NAM :
+
+
+docker stack :
+
+  ls :
+    docker stack ls :
+
+  ps :
+    docker stack ps STK :
+
+  services :
+    docker stack services STK :
+
+  deploy :
+    docker stack deploy -c FLE STK :
+
+  rm :
+    docker stack rm STK :
+
+  config :
+    docker stack config -c FLE :
+
+
+docker service :
+
+  ls :
+    docker service ls :
+
+  ps :
+    docker service ps SVC :
+
+  logs :
+    docker service logs SVC :
+
+  inspect :
+    docker service inspect SVC :
+
+  update :
+    docker service update --force SVC :
+    docker service update --image IMG SVC :
+
+  scale :
+    docker service scale SVC=NUM :
+
+  rollback :
+    docker service rollback SVC :
+
+  rm :
+    docker service rm SVC :
+
+
+docker node :
+
+  ls :
+    docker node ls :
+    docker node ls -q :
+
+  ps :
+    docker node ps NDE :
+
+  inspect :
+    docker node inspect NDE :
+
+  update :
+    docker node update --availability drain NDE :
+    docker node update --availability active NDE :
+    docker node update --label-add KEY=VAL NDE :
+    docker node update --label-rm KEY=VAL NDE :
+
+
+
+
+
