@@ -1,48 +1,81 @@
 DOCKER
 
---- контейнеры
+docker : общие команды
+  ps : процессы
+    docker ps     : контейнеры : запущенные
+    docker ps -a  : контейнеры : запущенные, остановленные и завершившиеся
+    docker ps -q  : ID контейнеров : запущенных
+    docker ps -qa : ID контейнеров : запущенных, остановленных и завершившихся
+  logs : логи
+    docker logs CTN        : логи
+    docker logs -t CTN     : логи + временные метки
+    docker logs -n NUM CTN : логи : tail
+    docker logs -f CTN     : логи : live
+  exec : команды
+    docker exec CTN CMD     : команда
+    docker exec -d CTN CMD  : команда : фоновый режим
+    docker exec -i CTN CMD  : интерактивная команда
+    docker exec -it CTN CMD : интерактивная команда : TTY
+  stop + kill : завершение
+    docker stop CTN : SIGTERM > timeout > SIGKILL
+    docker kill CTN : SIGKILL
+  rm : удаление
+    docker rm CTN    : удаление
+    docker rm -f CTN : удаление + остановка
+    docker rm -v CTN : удаление + удаление связанных анонимных томов
+  run : запуск
+    docker run IMG                    : запуск
+    docker run -d IMG                 : запуск : фоновый режим
+    docker run -i IMG CMD             : запуск + интерактивная команда
+    docker run -it IMG CMD            : запуск + интерактивная команда : TTY
+    docker run --name NAM IMG         : запуск + именование
+    docker run -p HST_PRT:CTN_PRT IMG : запуск + проброс порта
+    docker run -e KEY=VAL IMG         : запуск + экспорт переменной окружения
+    docker run -v HST_PTH:CTN_PTH IMG : запуск + монтирование тома/директории
+  cp : копирование
+    docker cp CTN:PTH HST_PTH : контейнер > хост
+    docker cp HST_PTH CTN:PTH : хост > контейнер
 
-ps : список контейнеров
-  docker ps     : контейнеры : запущенные
-  docker ps -a  : контейнеры : запущенные, остановленные и завершившиеся
-  docker ps -q  : идентификаторы контейнеров : запущенные
-  docker ps -qa : идентификаторы контейнеров : запущенные, остановленные и завершившиеся
+docker container : управление контейнерами
+  ls : список
+    docker container ls     : контейнеры : запущенные
+    docker container ls -a  : контейнеры : запущенные, остановленные и завершившиеся
+    docker container ls -q  : ID контейнеров : запущенных
+    docker container ls -qa : ID контейнеров : запущенных, остановленных и завершившихся
+  logs : логи
+    docker container logs CTN        : логи
+    docker container logs -t CTN     : логи + временные метки
+    docker container logs -f CTN     : логи : live
+    docker container logs -n NUM CTN : логи : tail
+  exec : команды
+    docker container exec CTN CMD     : команда
+    docker container exec -d CTN CMD  : команда : фоновый режим
+    docker container exec -i CTN CMD  : интерактивная команда
+    docker container exec -it CTN CMD : интерактивная команда : TTY
+  stop + kill : завершение
+    docker container stop CTN : SIGTERM > timeout > SIGKILL
+    docker container kill CTN : SIGKILL
+  rm : удаление
+    docker container rm CTN    : удаление
+    docker container rm -f CTN : удаление + остановка
+    docker container rm -v CTN : удаление + удаление связанных анонимных томов
+  run : запуск
+    docker container run IMG                    : запуск
+    docker container run -d IMG                 : запуск : фоновый режим
+    docker container run -i IMG CMD             : запуск + интерактивная команда
+    docker container run -it IMG CMD            : запуск + интерактивная команда : TTY
+    docker container run --name NAM IMG         : запуск + именование
+    docker container run -p HST_PRT:CTN_PRT IMG : запуск + проброс порта
+    docker container run -e KEY=VAL IMG         : запуск + экспорт переменной окружения
+    docker container run -v HST_PTH:CTN_PTH IMG : запуск + монтирование тома/директории
+  cp : копирование
+    docker container cp CTN:PTH HST_PTH : контейнер > хост
+    docker container cp HST_PTH CTN:PTH : хост > контейнер
 
-logs : логи контейнера
-  docker logs CTN        : логи
-  docker logs -t CTN     : логи + временные метки
-  docker logs -f CTN     : логи : live
-  docker logs -n NUM CTN : логи : tail
 
-exec : выполнение команды в контейнере
-  docker exec CTN CMD     : команда
-  docker exec -d CTN CMD  : команда : фоновый режим
-  docker exec -i CTN CMD  : интерактивная команда
-  docker exec -it CTN CMD : интерактивная команда : TTY
 
-stop + kill : завершение контейнера
-  docker stop CTN : SIGTERM > timeout > SIGKILL
-  docker kill CTN : SIGKILL
 
-rm : удаление контейнера
-  docker rm CTN    : удаление
-  docker rm -f CTN : удаление + остановка
-  docker rm -v CTN : удаление + удаление связанных анонимных томов
-
-run : запуск контейнера
-  docker run IMG                    : запуск
-  docker run -d IMG                 : запуск : фоновый режим
-  docker run -i IMG CMD             : запуск + интерактивная команда
-  docker run -it IMG CMD            : запуск + интерактивная команда : TTY
-  docker run --name NAM IMG         : запуск + именование
-  docker run -p HST_PRT:CTN_PRT IMG : запуск + проброс порта
-  docker run -e KEY=VAL IMG         : запуск + экспорт переменной окружения
-  docker run -v HST_PTH:CTN_PTH IMG : запуск + монтирование тома/директории
-
-cp : копирование файлов
-  docker cp CTN:PTH HST_PTH : контейнер > хост
-  docker cp HST_PTH CTN:PTH : хост > контейнер
-
+---
 stats : анализ контейнеров
   docker stats    : статистика : запущенные
   docker stats -a : статистика : запущенные, остановленные и завершившиеся
