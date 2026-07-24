@@ -3,13 +3,13 @@ DOCKER
 docker container : изолированная среда < файловое пространство + сеть + процессы
 
   ls :
-    docker container ls                          : контейнеры
-    docker container ls -q                       : ID
-    docker container ls -a                       : запущенные, остановленные, завершившиеся
+    docker container ls : контейнеры
+    docker container ls -q : ID
+    docker container ls -a : запущенные, остановленные, завершившиеся
 
   stats :
-    docker container stats                       :
-    docker container stats -a                    : запущенные, остановленные, завершившиеся
+    docker container stats :
+    docker container stats -a : запущенные, остановленные, завершившиеся
 
   inspect :
     docker container inspect CTN                 :
